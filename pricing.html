@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Bro Bus - Comunidade (Chat)</title>
+  <meta name="description" content="Comunidade Bro Bus: partilhe alertas de atrasos, lotação, greves e ajude outros utilizadores em tempo real.">
+  <meta name="keywords" content="Bro Bus, comunidade, chat, alertas, autocarros">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .chat-box {
+      height: 400px;
+      overflow-y: auto;
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+    }
+    .message {
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .message-user {
+      font-weight: bold;
+      color: #0d42ff;
+    }
+    .message-time {
+      font-size: 0.7rem;
+      color: #6c757d;
+      margin-left: 0.5rem;
+    }
+    .message-text {
+      margin-top: 0.25rem;
+      word-break: break-word;
+    }
+    .input-group-custom {
+      display: flex;
+      gap: 0.5rem;
+    }
+  </style>
+</head>
+
+<body class="pricing-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <h1 class="sitename">Bro Bus</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Lar</a></li>
+          <li><a href="about.html">Sobre</a></li>
+          <li><a href="services.html">Serviços</a></li>
+          <li><a href="pricing.html" class="active">Comunidade</a></li>
+          <li><a href="contact.html">Contacto</a></li>
+          <li><a href="game.html">Jogo</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/page-title-bg.jpg);">
+      <div class="container position-relative">
+        <h1>Comunidade Bro Bus</h1>
+        <p>Partilhe informação em tempo real. A sua ajuda faz a diferença.</p>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Lar</a></li>
+            <li class="current">Comunidade</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Chat Section -->
+    <section class="section">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card shadow-sm">
+              <div class="card-header bg-primary text-white">
+                <i class="bi bi-chat-dots-fill me-2"></i> Chat colaborativo
+              </div>
+              <div id="chatMessages" class="chat-box"></div>
+              <div class="card-body">
+                <div class="row g-2">
+                  <div class="col-md-3">
+                    <input type="text" id="userName" class="form-control" placeholder="Seu nome" value="Viajante">
+                  </div>
+                  <div class="col-md-7">
+                    <input type="text" id="msgInput" class="form-control" placeholder="Ex: Linha 101 com atraso de 15min">
+                  </div>
+                  <div class="col-md-2">
+                    <button id="sendBtn" class="btn btn-primary w-100">Enviar</button>
+                  </div>
+                </div>
+                <div class="mt-3 small text-muted text-center">
+                  <i class="bi bi-info-circle"></i> As mensagens ficam guardadas no seu navegador. Seja útil e respeite os outros.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dica rápida -->
+        <div class="row justify-content-center mt-5">
+          <div class="col-lg-8">
+            <div class="alert alert-light border" role="alert">
+              <h5><i ></i> O que pode partilhar?</h5>
+              <ul class="mb-0">
+                <li><strong>Atrasos</strong> – informe quantos minutos de espera.</li>
+                <li><strong>Lotação</strong> – avise se o autocarro vai cheio.</li>
+                <li><strong>Greves ou acidentes</strong> – ajude outros a evitarem percursos bloqueados.</li>
+                <li><strong>Rotas alternativas</strong> – partilhe caminhos que funcionem.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center"><span class="sitename">Bro Bus</span></a>
+          <p>Plataforma colaborativa e gratuita para melhorar o transporte público. Partilhe e receba informação em tempo real.</p>
+          <div class="social-links d-flex mt-4">
+            <a href="#"><i class="bi bi-twitter-x"></i></a>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Links</h4>
+          <ul>
+            <li><a href="index.html">Lar</a></li>
+            <li><a href="about.html">Sobre</a></li>
+            <li><a href="services.html">Serviços</a></li>
+            <li><a href="pricing.html">Comunidade</a></li>
+            <li><a href="contact.html">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Ajuda</h4>
+          <ul>
+            <li><a href="#">Política de privacidade</a></li>
+            <li><a href="#">Termos de uso</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contacto</h4>
+          <p><strong>Emanuel Bruno Arsénio da Silva</strong><br>
+          Email: ola@brobus.pt<br>
+          Santarém, Portugal</p>
+        </div>
+      </div>
+    </div>
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Bro Bus</strong> <span>Todos os direitos reservados</span></p>
+      <div class="credits">Design por <a href="https://bootstrapmade.com/">BootstrapMade</a> | Conteúdo adaptado para Bro Bus</div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- Chat script -->
+  <script>
+    let messages = JSON.parse(localStorage.getItem('brobus_chat')) || [];
+
+    function escapeHtml(text) {
+      return text.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+      });
+    }
+
+    function renderMessages() {
+      const container = document.getElementById('chatMessages');
+      if (!container) return;
+      container.innerHTML = '';
+      if (messages.length === 0) {
+        container.innerHTML = '<div class="text-center text-muted py-4">Nenhuma mensagem ainda. Seja o primeiro a partilhar um alerta!</div>';
+        return;
+      }
+      // Mostrar últimas 50 mensagens
+      messages.slice(-50).forEach(msg => {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message';
+        messageDiv.innerHTML = `
+          <div>
+            <span class="message-user">${escapeHtml(msg.user)}</span>
+            <span class="message-time">${msg.time}</span>
+          </div>
+          <div class="message-text">${escapeHtml(msg.text)}</div>
+        `;
+        container.appendChild(messageDiv);
+      });
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function sendMessage() {
+      const userInput = document.getElementById('userName');
+      const msgInput = document.getElementById('msgInput');
+      let user = userInput.value.trim();
+      const text = msgInput.value.trim();
+      if (!user) user = 'Anónimo';
+      if (!text) return;
+
+      messages.push({
+        user: user,
+        text: text,
+        time: new Date().toLocaleTimeString()
+      });
+      localStorage.setItem('brobus_chat', JSON.stringify(messages));
+      msgInput.value = '';
+      renderMessages();
+    }
+
+    document.getElementById('sendBtn').addEventListener('click', sendMessage);
+    document.getElementById('msgInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    renderMessages();
+  </script>
+</body>
+</html>
